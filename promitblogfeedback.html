@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://www.secret-retreats.com/blog/wp-content/uploads/2021/11/wow184.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form Container */
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Full-Width Elements */
+        h1 {
+            grid-column: 1 / -1;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+        }
+
+        input[type="text"], input[type="number"], input[type="email"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+            grid-column: 1 / -1;
+        }
+
+        /* Rating Section */
+        .rating-group {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .rating-group label {
+            display: flex;
+            align-items: center;
+        }
+
+        .rating-group input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        /* Submit Button */
+        button {
+            background: #2c3e50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            grid-column: 1 / -1;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #1a252f;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .rating-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="feedbackForm">
+        <h1>Feedback Form</h1>
+
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <div>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="10" max="99" placeholder="Enter your age" required>
+        </div>
+
+        <div>
+            <label for="phone">Phone Number:</label>
+            <select id="countryCode" name="countryCode">
+                <option value="+1">+1</option>
+                <option value="+91">+91</option>
+                <!-- Add other country codes as needed -->
+            </select>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" maxlength="15" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="rating-group">
+            <label for="poor">
+                <input type="radio" id="poor" name="rating" value="Poor">
+                Poor
+            </label>
+            <label for="average">
+                <input type="radio" id="average" name="rating" value="Average">
+                Average
+            </label>
+            <label for="good">
+                <input type="radio" id="good" name="rating" value="Good">
+                Good
+            </label>
+            <label for="excellent">
+                <input type="radio" id="excellent" name="rating" value="Excellent">
+                Excellent
+            </label>
+            <label for="phenomenal">
+                <input type="radio" id="phenomenal" name="rating" value="Phenomenal">
+                Phenomenal
+            </label>
+        </div>
+
+        <div>
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback" name="feedback" placeholder="Share your thoughts..."></textarea>
+        </div>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('feedbackForm');
+            const formData = new FormData(form);
+
+            const emailData = `
+                Name: ${formData.get('name')}
+                Age: ${formData.get('age')}
+                Phone: ${formData.get('countryCode')}${formData.get('phoneNumber')}
+                Email: ${formData.get('email')}
+                Rating: ${formData.get('rating')}
+                Feedback: ${formData.get('feedback')}
+            `;
+
+            const mailto = 'mailto:promitdhar740@gmail.com?subject=Feedback&body=' + encodeURIComponent(emailData);
+            window.location.href = mailto;
+        }
+    </script>
+</body>
+</html>
